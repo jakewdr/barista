@@ -1,0 +1,20 @@
+[project]
+name = "barista"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "chlorophyll>=0.4.2",
+    "ctkmenubar>=0.8",
+    "customtkinter>=5.2.2",
+    "pygments>=2.18.0",
+    "simplejson>=3.19.3",
+]
+
+[dependency-groups]
+dev = [
+    "pyinstaller>=6.11.1",
+    "python-minifier>=2.11.3",
+    "ruff>=0.8.2",
+]

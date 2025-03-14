@@ -1,28 +1,30 @@
 version: '3'
 
 tasks:
-
-    dev:
-        cmds:
-            - task format
-            - pipenv run python src/__main__.py
-
+    deps: [check]
     dist:
         cmds:
-            - task build
-            - python dist/bundle.py
+            - uv run build.py -OO
 
-    build:
+    dev:
+        deps: [check]
         cmds:
-            - task format
-            - pipenv run python scripts/effectual.py
+            - uv run python src/__main__.py -OO
+
+    check:
+        deps: [format, lint]
 
     format:
         cmds:
-            - pipenv run ruff check --fix src/ --config ruff.toml
-            - pipenv run ruff format src/ --config ruff.toml
+            - uv run ruff format src/ --config ruff.toml
+            
+    lint:
+        cmds:
+            - uv run ruff check --fix src/ --config ruff.toml
 
     setup:
         cmds:
-            - pipenv install
-            - pipenv lock
+            - uv python install 3.11
+            - uv venv --python 3.11
+            - uv lock
+            - uv sync

@@ -1,0 +1,5 @@
+- Language server support
+- Rewrite configs in json
+- Use json instead for basically everything
+- Setup pyinstaller
+- Setup treeview
