@@ -29,7 +29,7 @@ class App(customtkinter.CTk):
 
         # Create code view ->
         self.codeView = CodeView(
-            self, color_scheme=colourScheme, blockcursor=blockCursor, tab_width=8
+            self, color_scheme=colourScheme, blockcursor=blockCursor, tab_width=tabWidth
         )
         self.codeView.pack(fill="both", expand=True)
         self.codeView.config(font=("Consolas", 20))
@@ -57,7 +57,7 @@ class App(customtkinter.CTk):
 
     def _configureMenuBar(self):
         menu = CTkTitleMenu(master=self)
-        fileMenu = menu.add_cascade(" File")  # Space added for better menu bar spacing
+        fileMenu = menu.add_cascade(" File")  # Space added for better menu bar padding
         menu.add_cascade("Settings")
         menu.add_cascade("Run", command=self._runFile)
 
@@ -112,7 +112,7 @@ class App(customtkinter.CTk):
             print(f"No lexer found for file: {filePath}. Defaulting to plain text.")
             self.codeView.config(
                 lexer=pygments.lexers.TextLexer()
-            )  # Fallback to plain text
+            )  # Fallback to plain text view
 
     def _runFile(self):
         if not self.currentFile:
@@ -151,11 +151,11 @@ if __name__ == "__main__":
     fileTypes = [
         ("All Files", "*.*"),
         ("Python Files", "*.py;*.pyw"),
-        ("JavaScript Files", "*.js"),
-        ("TypeScript Files", "*.ts"),
+        ("JavaScript Files", "*.js;*.jsx;*.mjs;*.cjs;"),
+        ("TypeScript Files", "*.ts;*.tsx;*.mts;*.cts;"),
         ("HTML Files", "*.html"),
         ("CSS Files", "*.css"),
-        ("C Files", "*.c"),
+        ("C Files", "*.c;*.h"),
         ("C++ Files", "*.cpp"),
         ("Java Files", "*.java"),
         ("Go Files", "*.go"),
@@ -174,6 +174,7 @@ if __name__ == "__main__":
     blockCursor = bool(appearanceSettings.get("blockCursor"))
     colourScheme = str(appearanceSettings.get("textTheme"))
     useCustomThemes = bool(appearanceSettings.get("useCustomThemes"))
+    tabWidth = int(appearanceSettings.get("tabWidth"))
 
     # Load editor settings ->
     editorSettings = cfg.unpack(scriptLocation / Path("config/editor.json"))

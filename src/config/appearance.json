@@ -3,5 +3,6 @@
     "useCustomThemes": false,
     "customThemeFileName": "darkBlue",
     "textTheme": "dracula",
-    "blockCursor": true
+    "blockCursor": true,
+    "tabWidth": 8
 }
